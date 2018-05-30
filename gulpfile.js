@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	coffee = require('gulp-coffee'),
+	browserify = require('gulp-browserify'),
 	concat = require('gulp-concat');
 
 var coffeeSources = ['components/coffee/tagline.coffee'];
@@ -22,5 +23,6 @@ gulp.task('coffee', function() {
 gulp.task('js', function() {
 	gulp.src(jsSources)
 		.pipe(concat('script.js')) //HTML file calls script.js for concatination work
+		.pipe(browserify()) //after concatination, run script through browserify to let us use node.js modules in the browser
 		.pipe(gulp.dest('builds/development/js'))
 });
